@@ -1,2 +1,4 @@
-package com.example.api.delivery_backend.utils;public record ApiGlobalResponseDto() {
+package com.example.api.delivery_backend.utils;
+
+public record ApiGlobalResponseDto(Object response) {
 }
