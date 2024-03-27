@@ -2,7 +2,6 @@ package com.example.api.delivery_backend.controllers;
 
 import com.example.api.delivery_backend.dtos.FilterProductsRecordDto;
 import com.example.api.delivery_backend.dtos.ProductRecordDto;
-import com.example.api.delivery_backend.models.Category;
 import com.example.api.delivery_backend.services.ProductService;
 import com.example.api.delivery_backend.utils.ApiGlobalResponseDto;
 import jakarta.validation.Valid;
@@ -25,9 +24,16 @@ public class ProductController {
     }
 
     @PostMapping("/filtered")
-    public ResponseEntity<ApiGlobalResponseDto> getAllProdutcs(@RequestBody FilterProductsRecordDto dto){
+    public ResponseEntity<ApiGlobalResponseDto> getAllProdutcsWithFilter(@RequestBody FilterProductsRecordDto dto){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(productService.findAll(dto)));
     }
-    
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable(value = "id") UUID id){
+        productService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 
 }
