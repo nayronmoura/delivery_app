@@ -41,5 +41,13 @@ public class ProductService {
         }
     }
 
+    public ProductModel update(ProductRecordDto dto, UUID id){
+        var product = productRepository.findById(id);
+        if (product.isPresent()){
+            BeanUtils.copyProperties(dto, product.get());
+            return productRepository.save(product.get());
+        }
+        return null;
+    }
 
 }

@@ -28,6 +28,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(productService.findAll(dto)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody @Valid ProductRecordDto dto
+            , @PathVariable(value = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(productService.update(dto, id)));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteById(@PathVariable(value = "id") UUID id){
