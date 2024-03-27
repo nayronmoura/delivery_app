@@ -2,6 +2,7 @@ package com.example.api.delivery_backend.services;
 
 import com.example.api.delivery_backend.dtos.FilterProductsRecordDto;
 import com.example.api.delivery_backend.dtos.ProductRecordDto;
+import com.example.api.delivery_backend.exceptions.ResourceNotFoundException;
 import com.example.api.delivery_backend.models.ProductModel;
 import com.example.api.delivery_backend.repositories.ProductRepository;
 import org.springframework.beans.BeanUtils;
@@ -36,9 +37,10 @@ public class ProductService {
     @Transactional
     public void deleteById(UUID id){
         var product = productRepository.existsById(id);
-        if (product){
-            productRepository.deleteById(id);
+        if (!product){
+            throw new ResourceNotFoundException("Product" ,"id", id.toString());
         }
+        productRepository.deleteById(id);
     }
 
     public ProductModel update(ProductRecordDto dto, UUID id){
@@ -47,7 +49,7 @@ public class ProductService {
             BeanUtils.copyProperties(dto, product.get());
             return productRepository.save(product.get());
         }
-        return null;
+        throw new ResourceNotFoundException("Product", "id", id.toString());
     }
 
 }
