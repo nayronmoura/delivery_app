@@ -1,6 +1,7 @@
 package com.example.api.delivery_backend.services;
 
 import com.example.api.delivery_backend.dtos.FilterProductsRecordDto;
+import com.example.api.delivery_backend.dtos.ProductPutRecordDto;
 import com.example.api.delivery_backend.dtos.ProductRecordDto;
 import com.example.api.delivery_backend.exceptions.ResourceNotFoundException;
 import com.example.api.delivery_backend.models.ProductModel;
@@ -20,7 +21,7 @@ public class ProductService {
 
     @Transactional
     public ProductModel save(ProductRecordDto dto){
-        return productRepository.save(new ProductModel(dto));
+        return productRepository.save(new ProductModel(dto.name(), dto.description(), dto.price(),dto.category(), dto.image()));
     }
 
     public List<ProductModel> findAll(FilterProductsRecordDto dto) {
@@ -43,13 +44,14 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public ProductModel update(ProductRecordDto dto, UUID id){
-        var product = productRepository.findById(id);
-        if (product.isPresent()){
-            BeanUtils.copyProperties(dto, product.get());
-            return productRepository.save(product.get());
-        }
-        throw new ResourceNotFoundException("Product", "id", id.toString());
+    @Transactional
+    public ProductModel update(ProductPutRecordDto dto, UUID id){
+
+
+        var product = productRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Product", "id", id.toString()));
+        dto.toProduct(product);
+        return productRepository.save(product);
     }
 
 }

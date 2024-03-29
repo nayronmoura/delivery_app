@@ -24,16 +24,17 @@ public class ProductModel implements Serializable {
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private double price;
+    private Double price;
     @Column(nullable = false)
     private Category category;
     private String image;
 
-    public ProductModel(ProductRecordDto dto) {
-        this.name = dto.name();
-        this.description = dto.description();
-        this.price = dto.price();
-        this.category = dto.category();
-        this.image = dto.image();
+    public ProductModel(String name, String description, Double price, Category category, String image){
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.image = image;
     }
+
 }
