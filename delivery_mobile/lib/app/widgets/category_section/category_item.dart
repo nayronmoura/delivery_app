@@ -31,7 +31,11 @@ class _CategoryItemState extends State<CategoryItem> {
         mainAxisSize: MainAxisSize.min,
         children: [
           widget.icon,
-          Text(widget.text, style: const TextStyle(color: Colors.white)),
+          Text(widget.text, style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            )),
         ],
       ),
     );

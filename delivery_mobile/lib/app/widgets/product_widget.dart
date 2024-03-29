@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
+  final String productName;
+  final double productPrice;
+  const ProductWidget(
+      {super.key, required this.productName, required this.productPrice});
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -23,8 +26,15 @@ class _ProductWidgetState extends State<ProductWidget> {
           SizedBox(
               height: 100,
               child: Image.network('https://via.placeholder.com/150')),
-          const Text('Product name', style: TextStyle(color: Colors.white)),
-          const Text(r'R$ 20', style: TextStyle(color: Colors.white)),
+          Text(
+            widget.productName,
+            style: const TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          Text('R\$' + widget.productPrice.toStringAsFixed(2),
+              style: const TextStyle(
+                color: Colors.white,
+              )),
         ],
       ),
     );

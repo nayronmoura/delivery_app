@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: '/',
-    builder: (context, state) => const Home(),
+    builder: (context, state) => Home(),
   ),
   GoRoute(
     path: '/search',
