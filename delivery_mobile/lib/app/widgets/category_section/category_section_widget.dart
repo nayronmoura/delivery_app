@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatefulWidget {
   final List<CategoryItem> categorys;
-  const CategoryWidget({super.key, required this.categorys});
+  final String? firstSelected;
+
+  const CategoryWidget(
+      {super.key, required this.categorys, this.firstSelected});
 
   @override
   State<CategoryWidget> createState() => _CategoryWidgetState();

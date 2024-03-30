@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
+class ProductWidget extends StatelessWidget {
+  final String productName;
+  final double price;
+  final String? image;
+  const ProductWidget(
+      {super.key, required this.productName, required this.price, this.image});
 
-  @override
-  State<ProductWidget> createState() => _ProductWidgetState();
-}
-
-class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -22,9 +21,19 @@ class _ProductWidgetState extends State<ProductWidget> {
         children: [
           SizedBox(
               height: 100,
-              child: Image.network('https://via.placeholder.com/150')),
-          const Text('Product name', style: TextStyle(color: Colors.white)),
-          const Text(r'R$ 20', style: TextStyle(color: Colors.white)),
+              width: 100,
+              child: image != null
+                  ? Image.network('https://via.placeholder.com/150')
+                  : const Center(
+                      child: Icon(
+                        Icons.image,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    )),
+          Text(productName, style: const TextStyle(color: Colors.white)),
+          Text(r'R$ ' + price.toString(),
+              style: const TextStyle(color: Colors.white)),
         ],
       ),
     );
