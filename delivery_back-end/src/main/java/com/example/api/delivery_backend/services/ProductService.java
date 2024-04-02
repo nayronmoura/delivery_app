@@ -6,7 +6,6 @@ import com.example.api.delivery_backend.dtos.ProductRecordDto;
 import com.example.api.delivery_backend.exceptions.ResourceNotFoundException;
 import com.example.api.delivery_backend.models.ProductModel;
 import com.example.api.delivery_backend.repositories.ProductRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

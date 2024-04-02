@@ -1,7 +1,6 @@
 package com.example.api.delivery_backend.models;
 
 
-import com.example.api.delivery_backend.dtos.ProductRecordDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

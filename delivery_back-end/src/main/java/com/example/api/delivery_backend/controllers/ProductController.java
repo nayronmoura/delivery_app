@@ -19,7 +19,7 @@ import java.util.UUID;
 @Validated
 public class ProductController {
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @PostMapping
     public ResponseEntity<ApiGlobalResponseDto> saveProduct(@RequestBody @Valid ProductRecordDto dto){

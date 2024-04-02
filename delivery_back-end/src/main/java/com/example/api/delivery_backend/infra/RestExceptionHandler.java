@@ -1,16 +1,15 @@
 package com.example.api.delivery_backend.infra;
 
 import com.example.api.delivery_backend.exceptions.ResourceNotFoundException;
+import com.example.api.delivery_backend.exceptions.UserAlreadyExistsException;
 import com.example.api.delivery_backend.utils.ApiGlobalResponseDto;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +32,12 @@ public class RestExceptionHandler {
     private ResponseEntity<ApiGlobalResponseDto> resourceNotFoundHandler(ResourceNotFoundException resourceNotFoundException){
         Map<String, String> error = Map.of("error", resourceNotFoundException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiGlobalResponseDto(error));
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    private ResponseEntity<ApiGlobalResponseDto> userAlreadyExistsHandler(UserAlreadyExistsException exception){
+        Map<String, String> error = Map.of("error", exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiGlobalResponseDto(error));
     }
 
 }
